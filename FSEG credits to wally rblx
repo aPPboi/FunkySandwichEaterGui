@@ -174,11 +174,11 @@ local fireSignal, rollChance do
         end
 
         local chances = {
-            { 'Sickly Perfect', Options.SickChance.Value },
-            { 'Decently Good', Options.GoodChance.Value },
-            { 'Ehh, Ok', Options.OkChance.Value },
-            { 'Dude, That's Bad', Options.BadChance.Value },
-            { 'Nah G, you gonna Miss' , Options.MissChance.Value },
+            { 'Sick', Options.SickChance.Value },
+            { 'Good', Options.GoodChance.Value },
+            { 'Ok', Options.OkChance.Value },
+            { 'Bad', Options.BadChance.Value },
+            { 'Miss' , Options.MissChance.Value },
         }
 
         table.sort(chances, function(a, b)
@@ -403,7 +403,7 @@ local ActivateUnlockables do
         local idx = table.find(framework.SongsWhitelist, client.UserId)
         if idx then return end
 
-        UI:Notify('Developer's Arrows have been unlocked!', 3)
+        UI:Notify('Developer arrows have been unlocked!', 3)
         table.insert(framework.SongsWhitelist, client.UserId)
     end
 end
@@ -604,7 +604,7 @@ local SaveManager = {} do
 end
 
 local Window = UI:CreateWindow({
-    Title = string.format('Funky Friday OP Script by aPP  - version %s | updated: %s', metadata.version, metadata.updated),
+    Title = string.format('funky friday autoplayer - version %s | updated: %s', metadata.version, metadata.updated),
     AutoShow = true,
     
     Center = true,
@@ -629,11 +629,11 @@ Groups.Autoplayer = Tabs.Main:AddLeftGroupbox('Autoplayer')
     Groups.Autoplayer:AddDropdown('ScoreModifier', { 
         Text = 'Score modifications', 
         Default = 1, 
-        Values = { 'Do nothing', 'No decrease on miss (BROKEN)', 'Increase score on miss (ALSO BROKEN)' },
+        Values = { 'Do nothing', 'No decrease on miss', 'Increase score on miss' },
         Tooltip = 'Modifies certain game functions to help you keep your score up!',
     })
 
-Groups.HitChances = Tabs.Main:AddLeftGroupbox('Funky Hit Chances')
+Groups.HitChances = Tabs.Main:AddLeftGroupbox('Hit chances')
     Groups.HitChances:AddSlider('SickChance',   { Text = 'Sick chance', Min = 0, Max = 100, Default = 100, Suffix = '%', Rounding = 0 })
     Groups.HitChances:AddSlider('GoodChance',   { Text = 'Good chance', Min = 0, Max = 100, Default = 0, Suffix = '%', Rounding = 0 })
     Groups.HitChances:AddSlider('OkChance',     { Text = 'Ok chance',   Min = 0, Max = 100, Default = 0, Suffix = '%', Rounding = 0 })
@@ -660,10 +660,10 @@ Groups.Keybinds = Tabs.Main:AddRightGroupbox('Keybinds')
 
 Groups.Configs = Tabs.Miscellaneous:AddRightGroupbox('Configs')
 Groups.Credits = Tabs.Miscellaneous:AddRightGroupbox('Credits')
-    Groups.Credits:AddLabel('<font color="#3da5ff">aPP</font> - script')
-    Groups.Credits:AddLabel('<font color="#de6cff">LolRigged</font> - contributor')
-    Groups.Credits:AddLabel('LolRigged - ui library')
-    Groups.Credits:AddLabel('aPP - old ui library')
+    Groups.Credits:AddLabel('<font color="#3da5ff">wally</font> - script')
+    Groups.Credits:AddLabel('<font color="#de6cff">Sezei</font> - contributor')
+    Groups.Credits:AddLabel('Inori - ui library')
+    Groups.Credits:AddLabel('Jan - old ui library')
 
 Groups.Unlockables = Tabs.Miscellaneous:AddRightGroupbox('Unlockables')
     Groups.Unlockables:AddButton('Unlock developer notes', ActivateUnlockables)
@@ -674,7 +674,7 @@ Groups.Misc = Tabs.Miscellaneous:AddRightGroupbox('Miscellaneous')
     Groups.Misc:AddDivider()
     Groups.Misc:AddButton('Unload script', function() pcall(shared._unload) end)
     Groups.Misc:AddButton('Copy discord', function()
-        if pcall(setclipboard, "https://discord.gg/nVDqepdvKq") then
+        if pcall(setclipboard, "https://wally.cool/discord") then
             UI:Notify('Successfully copied discord link to your clipboard!', 5)
         end
     end)
@@ -770,4 +770,4 @@ do
     })
 end
 
-UI:Notify(string.format('Loaded aPP's script in %.4f second(s)! Hooray!', tick() - start), 3)
+UI:Notify(string.format('Loaded script in %.4f second(s)!', tick() - start), 3)
